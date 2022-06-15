@@ -24,5 +24,5 @@ async function getDataByItem(data, offset = 0){
         condition: item.condition
     }));
 
-    return response;
+    return items;
 }
