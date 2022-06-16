@@ -2,7 +2,7 @@
 import { InputText } from 'primereact/inputtext';
 import { useDispatch } from 'react-redux/es/exports';
 import { Button } from 'primereact/button';
-import { fetchItems } from '../../features/mercadoLibre/mercadoLibreSlice';
+import { fetchItems, setUserItem } from '../../features/mercadoLibre/mercadoLibreSlice';
 function Searchbar (){
     const dispatch = useDispatch();    
     const onSearchItem = (e)=>{
@@ -10,6 +10,7 @@ function Searchbar (){
         const data = Array.from(new FormData(e.target));
         const obj = Object.fromEntries(data) //Object.fromEntries nos toma un arreglo de 2 valores y lo 
         //transforma en un objeto por ejemplo ["nombre", "andres"] => {nombre: 'andres'}
+        dispatch(setUserItem(obj.item));
         dispatch(fetchItems(obj.item));
     }
     return (

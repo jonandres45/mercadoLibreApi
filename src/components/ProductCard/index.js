@@ -5,7 +5,7 @@ function ProductCard({
     title,
     precio,
     condicion,
-    stock
+    stock,
 }){
     const footer = ()=>{
         return (

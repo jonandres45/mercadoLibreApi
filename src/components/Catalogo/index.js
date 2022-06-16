@@ -6,8 +6,8 @@ function Catalogo(){
     return (
         <>
         {items.map(item =>(              
-            <div className='col-3 text-center '>
-                <ProductCard
+            <div className='col-3 text-center ' key={item.id}>
+                <ProductCard                    
                     src={item.thumbnall}
                     title={item.title}
                     precio={item.price}

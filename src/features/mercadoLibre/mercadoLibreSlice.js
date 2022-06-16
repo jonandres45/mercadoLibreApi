@@ -6,10 +6,14 @@ export const mercadoLibreSlice = createSlice({
     initialState:{
         items: [],
         loading: false,
+        userItem:false,
     },
     reducers: {
         setItems: (state, action)=>{
             state.items = action.payload;
+        },
+        setUserItem:(state, action)=>{
+            state.userItem = action.payload;
         },
         handleSpinner: (state)=>{
             state.loading = !state.loading;
@@ -17,7 +21,7 @@ export const mercadoLibreSlice = createSlice({
     }
 });
 
-export const {setItems, handleSpinner} = mercadoLibreSlice.actions;
+export const {setItems, setUserItem, handleSpinner} = mercadoLibreSlice.actions;
 
 export default mercadoLibreSlice.reducer;
 
