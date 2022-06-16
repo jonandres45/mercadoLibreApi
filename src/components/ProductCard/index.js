@@ -21,7 +21,7 @@ function ProductCard({
     }
     return(                
         <Card title={title} footer={footer}>
-            <img src={src} alt={title}></img>
+            <img src={src} alt={title} width="90" height="90"></img>
             <p>${precio}</p>
         </Card>
     )

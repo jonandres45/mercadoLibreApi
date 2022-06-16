@@ -5,12 +5,12 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "./App.css";
 import Catalogo from './components/Catalogo';
-import ProductCard from './components/ProductCard';
 import Searchbar from './components/SearchBar';
 import OrderBy from './components/OrderBy';
 import Pagination from './components/Pagination';
 
 function App() {
+  
   return (
     <React.StrictMode>
       <div style={{width:"99%", margin:'0 auto'}}>
@@ -18,16 +18,8 @@ function App() {
           <div className="col-12 text-center">
             <Searchbar/>
             <OrderBy/>
-          </div>
-          <Catalogo>
-            <ProductCard
-              src="/public/iphone.jpg"
-              title="Contenido"
-              precio="1000"
-              condicion="Nuevo"
-              stock="100"
-            />
-          </Catalogo>
+          </div>          
+          <Catalogo/>
         </div>
         <Pagination/>
       </div>
