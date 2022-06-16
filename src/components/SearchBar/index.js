@@ -12,7 +12,7 @@ function Searchbar (){
         const obj = Object.fromEntries(data) //Object.fromEntries nos toma un arreglo de 2 valores y lo 
         //transforma en un objeto por ejemplo ["nombre", "andres"] => {nombre: 'andres'}
 
-        if(palabra !== obj.item){ //Ahorrando cache
+        if(palabra !== obj.item){ //Ahorrando con cache
             dispatch(setUserItem(obj.item));
             dispatch(fetchItems(obj.item));
         }
