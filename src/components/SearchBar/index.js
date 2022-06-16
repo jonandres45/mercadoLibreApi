@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Button } from 'primereact/button';
 import { fetchItems, setUserItem } from '../../features/mercadoLibre/mercadoLibreSlice';
 function Searchbar (){
-    const palabra = useSelector((state)=>state.mercadoLibre.userItem);
+    const {palabra, loading} = useSelector((state)=>state.mercadoLibre);
     const dispatch = useDispatch();    
     const onSearchItem = (e)=>{
         e.preventDefault();        
@@ -30,6 +30,7 @@ function Searchbar (){
             </span>
             <Button 
                 className='p-button-success'                
+                loading={loading}
             >
                 Buscar
             </Button>
