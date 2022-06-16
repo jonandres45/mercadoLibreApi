@@ -7,6 +7,7 @@ export const mercadoLibreSlice = createSlice({
         items: [],
         loading: false,
         userItem:false,
+        total: 0
     },
     reducers: {
         setItems: (state, action)=>{
@@ -17,11 +18,14 @@ export const mercadoLibreSlice = createSlice({
         },
         handleSpinner: (state)=>{
             state.loading = !state.loading;
+        },
+        setTotal: (state, action)=>{
+            state.total = action.payload
         }
     }
 });
 
-export const {setItems, setUserItem, handleSpinner} = mercadoLibreSlice.actions;
+export const {setItems, setUserItem, setTotal, handleSpinner} = mercadoLibreSlice.actions;
 
 export default mercadoLibreSlice.reducer;
 
@@ -31,6 +35,7 @@ export const fetchItems = (item, offset = 0)=>(dispatch)=>{
     API.get(`/${item}/${offset}`)
     .then((response)=>{
         dispatch(setItems(response.data));
+        dispatch(setTotal(response.data[0].total))
         dispatch(handleSpinner());
     })
     .catch((error)=>console.log(error));

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Pagination(){
     let userItem = useSelector((state)=>state.mercadoLibre.userItem);
+    let total = useSelector((state)=>state.mercadoLibre.total);
     const dispatch = useDispatch();
     const [basicFirst, setBasicFirst] = useState(0);
     const [basicRows, setBasicRows] = useState(30);
@@ -18,12 +19,14 @@ function Pagination(){
     }
     return(
         <div>
-            <Paginator 
+            {userItem ? 
+                <Paginator 
                 first={basicFirst} 
                 rows={basicRows} 
-                totalRecords={1000} 
+                totalRecords={total > 100 ? 1000 : total}
                 onPageChange={onBasicPageChange}
-            />
+            /> : null}
+
         </div>
     )
 }

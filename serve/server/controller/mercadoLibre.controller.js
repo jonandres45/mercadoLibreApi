@@ -14,7 +14,10 @@ async function getDataByItem(data, offset = 0){
     const req = await axios.get(`${endpoint}${parametros}`);
     const response = await req.data;
 
+    const total = response.paging.total;
+
     response.results.map(item => items.push({
+        total:total,
         id: item.id,
         title: item.title,
         price: item.price,
