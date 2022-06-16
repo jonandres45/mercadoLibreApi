@@ -1,4 +1,5 @@
 import {Card} from 'primereact/card';
+import { Image } from 'primereact/image';
 
 function ProductCard({
     src,
@@ -7,6 +8,12 @@ function ProductCard({
     condicion,
     stock,
 }){
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+    })
+
     const footer = ()=>{
         return (
             <div className='grid'>
@@ -21,8 +28,8 @@ function ProductCard({
     }
     return(                
         <Card title={title} footer={footer}>
-            <img src={src} alt={title} width="90" height="90"></img>
-            <p>${precio}</p>
+            <Image src={src} alt={title} width="90" height="90" preview />
+            <p>{formatter.format(precio)}</p>
         </Card>
     )
 }

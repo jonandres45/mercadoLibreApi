@@ -5,6 +5,7 @@ import { setItems } from '../../features/mercadoLibre/mercadoLibreSlice';
 
 function OrderBy(){
     let items = useSelector((state)=>state.mercadoLibre.items);
+
     const dispatch = useDispatch();
     const [selectedCity1, setSelectedCity1] = useState(null);
     const onCityChange = (e) => {
@@ -17,11 +18,8 @@ function OrderBy(){
                 newItems = newItems.sort(((a, b)=> a.price - b.price));
                 break;
             case 'CONDICION':
-            case 'STOCK':
-                newItems = newItems.sort(((a, b)=> a.stock - b.stock));
-                break;
-            case 'SINSTOCK':
-                newItems = newItems.sort(((a, b)=> a.stock - b.stock));
+                const ordenamiento = {new: 1, used: 2}; //modo en que se ordenaran
+                newItems = newItems.sort(((a, b)=> ordenamiento[a.condition] - ordenamiento[b.condition]));
                 break;
         }        
         dispatch(setItems(newItems));        
@@ -32,8 +30,6 @@ function OrderBy(){
         { name: 'Mayor a menor precio', code: 'DESC' },
         { name: 'Menor a mayor precio', code: 'ASC' },
         { name: 'Su condición', code: 'CONDICION' },
-        { name: 'En stock', code: 'STOCK' },
-        { name: 'Sin stock', code: 'SINSTOCK' }
     ];
 
     return(
