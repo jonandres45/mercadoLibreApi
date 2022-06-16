@@ -13,12 +13,15 @@ function App() {
   
   return (
     <React.StrictMode>
-      <div style={{width:"99%", margin:'0 auto'}}>
+      <div style={{width:"99%", margin:'0 auto'}}>        
         <div className='grid justify-content-center'>
           <div className="col-12 text-center">
             <Searchbar/>
             <OrderBy/>
-          </div>          
+          </div>
+        </div>
+        <Pagination/>
+        <div className='grid justify-content-center'>
           <Catalogo/>
         </div>
         <Pagination/>

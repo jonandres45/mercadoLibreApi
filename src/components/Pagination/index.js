@@ -1,21 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Paginator } from 'primereact/paginator';
 import { useDispatch } from 'react-redux/es/exports';
-import { fetchItems } from '../../features/mercadoLibre/mercadoLibreSlice';
+import { fetchItems, setBasicFirst, setBasicRows } from '../../features/mercadoLibre/mercadoLibreSlice';
 import { useSelector } from 'react-redux';
 
 function Pagination(){
-    let userItem = useSelector((state)=>state.mercadoLibre.userItem);
-    let total = useSelector((state)=>state.mercadoLibre.total);
+    let {userItem, total, basicFirst, basicRows} = useSelector((state)=>state.mercadoLibre);
     const dispatch = useDispatch();
-    const [basicFirst, setBasicFirst] = useState(0);
-    const [basicRows, setBasicRows] = useState(30);
     const onBasicPageChange = (event) => {
         if(userItem){
             dispatch(fetchItems(userItem, event.first))
-        }        
-        setBasicFirst(event.first);
-        setBasicRows(event.rows);
+        }
+        console.log(event.first);
+        dispatch(setBasicFirst(event.first));
+        dispatch(setBasicRows(event.rows));
     }
     return(
         <div>

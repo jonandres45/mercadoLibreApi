@@ -11,7 +11,7 @@ async function getDataByItem(data, offset = 0){
     const items = [];
     const endpoint = process.env.End_point;
     const parametros = offset > 0 ? `/search?q=${data}&offset=${offset}` : `/search?q=${data}`; 
-    const req = await axios.get(`${endpoint}${parametros}`);
+    const req = await axios.get(`${endpoint}${parametros}&limit=30`);
     const response = await req.data;
 
     const total = response.paging.total;
