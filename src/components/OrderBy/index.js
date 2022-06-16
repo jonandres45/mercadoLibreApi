@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { useSelector, useDispatch } from 'react-redux';
-import { setItems } from '../../features/mercadoLibre/mercadoLibreSlice';
+import { setItems, setOrder } from '../../features/mercadoLibre/mercadoLibreSlice';
 
 function OrderBy(){
     let items = useSelector((state)=>state.mercadoLibre.items);
+    let order = useSelector((state)=>state.mercadoLibre.order);
 
     const dispatch = useDispatch();
-    const [selectedCity1, setSelectedCity1] = useState(null);
     const onCityChange = (e) => {
         let newItems = [...items];
         switch(e.value.code){
@@ -21,9 +21,11 @@ function OrderBy(){
                 const ordenamiento = {new: 1, used: 2}; //modo en que se ordenaran
                 newItems = newItems.sort(((a, b)=> ordenamiento[a.condition] - ordenamiento[b.condition]));
                 break;
+            default:
+                return false
         }        
         dispatch(setItems(newItems));        
-        setSelectedCity1(e.value);
+        dispatch(setOrder(e.value));
     }
 
     const cities = [
@@ -34,7 +36,7 @@ function OrderBy(){
 
     return(
         <div>
-            <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Ordenar por" />
+            <Dropdown value={order} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Ordenar por" />
         </div>
     );
 }

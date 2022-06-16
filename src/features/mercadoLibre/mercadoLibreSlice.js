@@ -7,7 +7,8 @@ export const mercadoLibreSlice = createSlice({
         items: [],
         loading: false,
         userItem:false,
-        total: 0
+        total: 0,
+        order: null,
     },
     reducers: {
         setItems: (state, action)=>{
@@ -21,17 +22,21 @@ export const mercadoLibreSlice = createSlice({
         },
         setTotal: (state, action)=>{
             state.total = action.payload
+        },
+        setOrder: (state, action)=>{
+            state.order = action.payload;
         }
     }
 });
 
-export const {setItems, setUserItem, setTotal, handleSpinner} = mercadoLibreSlice.actions;
+export const {setItems, setUserItem, setTotal, setOrder, handleSpinner} = mercadoLibreSlice.actions;
 
 export default mercadoLibreSlice.reducer;
 
 export const fetchItems = (item, offset = 0)=>(dispatch)=>{
     dispatch(handleSpinner());
     dispatch(setItems([]));
+    dispatch(setOrder());
     API.get(`/${item}/${offset}`)
     .then((response)=>{
         dispatch(setItems(response.data));

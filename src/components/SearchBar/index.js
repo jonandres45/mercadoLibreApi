@@ -1,18 +1,23 @@
 
 import { InputText } from 'primereact/inputtext';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Button } from 'primereact/button';
 import { fetchItems, setUserItem } from '../../features/mercadoLibre/mercadoLibreSlice';
 function Searchbar (){
+    const palabra = useSelector((state)=>state.mercadoLibre.userItem);
     const dispatch = useDispatch();    
     const onSearchItem = (e)=>{
-        e.preventDefault();
+        e.preventDefault();        
         const data = Array.from(new FormData(e.target));
         const obj = Object.fromEntries(data) //Object.fromEntries nos toma un arreglo de 2 valores y lo 
         //transforma en un objeto por ejemplo ["nombre", "andres"] => {nombre: 'andres'}
-        dispatch(setUserItem(obj.item));
-        dispatch(fetchItems(obj.item));
+
+        if(palabra !== obj.item){ //Ahorrando cache
+            dispatch(setUserItem(obj.item));
+            dispatch(fetchItems(obj.item));
+        }
     }
+
     return (
         <form onSubmit={onSearchItem}>
             <h5>Buscar articulo</h5>
