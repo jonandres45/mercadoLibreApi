@@ -49,7 +49,7 @@ export const fetchItems = (item, offset = 0)=>(dispatch)=>{
     API.get(`/${item}/${offset}`)
     .then((response)=>{
         dispatch(setItems(response.data));
-        if(response.data[0].total){
+        if(response.data.length > 0){
             dispatch(setTotal(response.data[0].total))            
         }else{
             alert("No encontramos nada :(")
