@@ -12,10 +12,10 @@ function OrderBy(){
         let newItems = [...items];
         switch(e.value.code){
             case 'ASC':
-                newItems = newItems.sort(((a, b)=> b.price - a.price));
-                break;
-            case 'DESC':
                 newItems = newItems.sort(((a, b)=> a.price - b.price));
+                break;
+            case 'DESC':                
+                newItems = newItems.sort(((a, b)=> b.price - a.price));
                 break;
             case 'CONDICION':
                 const ordenamiento = {new: 1, used: 2}; //modo en que se ordenaran
